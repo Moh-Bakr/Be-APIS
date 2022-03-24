@@ -9,11 +9,11 @@ use App\Http\Controllers\UseCaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-header("Cache-Control: no-cache, must-revalidate");
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-header('Access-Control-Allow-Origin:  *');
-header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
-header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+//header("Cache-Control: no-cache, must-revalidate");
+//header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+//header('Access-Control-Allow-Origin:  *');
+//header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+//header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 # login & register & logout & approval
 
 
@@ -31,7 +31,10 @@ Route::resource('/usecases', UseCaseController::class);
 Route::resource('/advisorysource', AdvisorySourceController::class);
 Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
+Route::group(['middleware' => ['cors']], function () {
+    Route::resource('/orgs', OrgStructureController::class);
 
+});
 //Route::resource('/products', ProductController::class);
 //Route::get('/products', [ProductController::class, 'index']);
 //Route::get('/products/{id}', [ProductController::class, 'show']);
