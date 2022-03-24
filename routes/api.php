@@ -29,7 +29,7 @@ Route::get('/users', [AuthController::class, 'users']);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
 Route::middleware(['cors'])->group(function () {
-    Route::resource('/orgs', OrgStructureController::class);
+    Route::get('/orgs', [OrgStructureController::class,'index']);
 });
 
 # Forums
