@@ -23,7 +23,7 @@ Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
 Route::get('/users', [AuthController::class, 'users']);
 
 # Org
-//Route::resource('/orgs', OrgStructureController::class);
+Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
 # Forums
@@ -31,10 +31,10 @@ Route::resource('/usecases', UseCaseController::class);
 Route::resource('/advisorysource', AdvisorySourceController::class);
 Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
-Route::group(['middleware' => ['cors']], function () {
-    Route::resource('/orgs', OrgStructureController::class);
-
-});
+//Route::group(['middleware' => ['cors']], function () {
+//    Route::resource('/orgs', OrgStructureController::class);
+//
+//});
 //Route::resource('/products', ProductController::class);
 //Route::get('/products', [ProductController::class, 'index']);
 //Route::get('/products/{id}', [ProductController::class, 'show']);
