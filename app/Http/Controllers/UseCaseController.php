@@ -7,79 +7,50 @@ use Illuminate\Http\Request;
 
 class UseCaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return UseCase::get()->all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UseCase  $useCase
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UseCase $useCase)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UseCase  $useCase
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UseCase $useCase)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UseCase  $useCase
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UseCase $useCase)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UseCase  $useCase
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UseCase $useCase)
-    {
-        //
+        try {
+            $fields = $request->validate([
+                'identifier' => 'required|string',
+                'purpose' => 'required|string',
+                'risk' => 'required|string',
+                'type' => 'required|string',
+                'stakeholders' => 'required|string',
+                'requirements' => 'required|string',
+                'logic' => 'required|string',
+                'output' => 'required|string',
+                'volume' => 'required|string',
+                'falsepositive' => 'required|string',
+                'priority' => 'required|string',
+                'playbook' => 'required|string',
+                'production' => 'required|string',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $use_cases = UseCase::create([
+            'identifier' => $fields['identifier'],
+            'purpose' => $fields['purpose'],
+            'risk' => $fields['risk'],
+            'type' => $fields['type'],
+            'stakeholders' => $fields['stakeholders'],
+            'requirements' => $fields['requirements'],
+            'output' => $fields['output'],
+            'volume' => $fields['volume'],
+            'falsepositive' => $fields['falsepositive'],
+            'logic' => $fields['logic'],
+            'priority' => $fields['priority'],
+            'playbook' => $fields['playbook'],
+            'production' => $fields['production'],
+        ]);
+        $response = [
+            'use_cases' => $use_cases,
+        ];
+        return response($response, 201);
     }
 }

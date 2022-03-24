@@ -4,8 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class UseCase extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'identifier','purpose','risk','type','stakeholders',
+        'requirements','logic','output','volume','falsepositive',
+        'priority','playbook','production'
+    ];
+    use HasApiTokens, HasFactory, Notifiable;
 }

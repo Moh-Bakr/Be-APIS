@@ -34,7 +34,7 @@ class OrgStructureController extends Controller
     {
         try {
             $fields = $request->validate([
-                'org' => 'required|string',
+                'org' => 'string',
             ]);
         } catch (\Illuminate\Validation\ValidationException $th) {
             return $th->validator->errors();
