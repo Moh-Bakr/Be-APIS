@@ -14,6 +14,11 @@ header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, PATCH, DELETE');
 header('Access-Control-Allow-Headers: Accept, Content-Type, X-Auth-Token, Origin, Authorization');
 
 # login & register & logout & approval
+
+Route::get('/hello', function () {
+    return "hello heroku";
+});
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
