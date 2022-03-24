@@ -21,25 +21,33 @@ use Illuminate\Support\Facades\Route;
 //    return response('',200);
 //})->where('any', '.*');
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
-Route::get('/users', [AuthController::class, 'users']);
 
 # Org
 //Route::resource('/orgs', OrgStructureController::class);
-Route::put('/orgs', [OrgStructureController::class, 'update']);
 
 Route::middleware(['cors'])->group(function () {
-    Route::get('/orgs', [OrgStructureController::class,'index']);
+    
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
+    Route::get('/users', [AuthController::class, 'users']);
+
+    Route::get('/orgs', [OrgStructureController::class, 'index']);
     Route::post('/orgs', [OrgStructureController::class, 'store']);
+    Route::put('/orgs', [OrgStructureController::class, 'update']);
+
+    Route::resource('/usecases', UseCaseController::class);
+    Route::resource('/advisorysource', AdvisorySourceController::class);
+    Route::resource('/servicecateloge', ServiceCatelogeController::class);
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
 
 });
 
 # Forums
-Route::resource('/usecases', UseCaseController::class);
-Route::resource('/advisorysource', AdvisorySourceController::class);
-Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
 //Route::group(['middleware' => ['cors']], function () {
 //    Route::resource('/orgs', OrgStructureController::class);
@@ -50,6 +58,4 @@ Route::resource('/servicecateloge', ServiceCatelogeController::class);
 //Route::get('/products/{id}', [ProductController::class, 'show']);
 //Route::get('/products/search/{name}', [ProductController::class, 'search']);
 //Route::put('/approve/userbyid/{id}', [AuthController::class, 'approve_user_by_id']);
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
+
