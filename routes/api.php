@@ -28,9 +28,10 @@ Route::get('/users', [AuthController::class, 'users']);
 //Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
-Route::group(['middleware' => ['cors']], function () {
+Route::middleware(['cors'])->group(function () {
     Route::resource('/orgs', OrgStructureController::class);
 });
+
 # Forums
 Route::resource('/usecases', UseCaseController::class);
 Route::resource('/advisorysource', AdvisorySourceController::class);
