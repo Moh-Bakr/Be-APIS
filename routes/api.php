@@ -23,7 +23,7 @@ Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
 Route::get('/users', [AuthController::class, 'users']);
 
 # Org
-Route::resource('/orgs', OrgStructureController::class);
+//Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
 # Forums
