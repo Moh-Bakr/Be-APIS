@@ -25,9 +25,6 @@ return [
 
     'allowed_headers' => ['*'],
 
-
-//    'allowed_headers' => ['*'],
-
     'exposed_headers' => [],
 
     'max_age' => 0,
