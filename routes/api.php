@@ -29,10 +29,11 @@ Route::get('/users', [AuthController::class, 'users']);
 # Org
 //Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
-Route::post('/orgs', [OrgStructureController::class, 'store']);
 
 Route::middleware(['cors'])->group(function () {
     Route::get('/orgs', [OrgStructureController::class,'index']);
+    Route::post('/orgs', [OrgStructureController::class, 'store']);
+
 });
 
 # Forums
