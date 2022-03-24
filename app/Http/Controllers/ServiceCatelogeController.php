@@ -7,79 +7,42 @@ use Illuminate\Http\Request;
 
 class ServiceCatelogeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return ServiceCateloge::get()->all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ServiceCateloge  $serviceCateloge
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ServiceCateloge $serviceCateloge)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ServiceCateloge  $serviceCateloge
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ServiceCateloge $serviceCateloge)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ServiceCateloge  $serviceCateloge
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ServiceCateloge $serviceCateloge)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ServiceCateloge  $serviceCateloge
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ServiceCateloge $serviceCateloge)
-    {
-        //
+        try {
+            $fields = $request->validate([
+                'name' => 'required|string',
+                'owner' => 'required|string',
+                'description' => 'required|string',
+                'status' => 'required|string',
+                'hours' => 'required|string',
+                'inputs' => 'required|string',
+                'outputs' => 'required|string',
+                'consumers' => 'required|string',
+                'processes' => 'required|string',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $AdvisorySource = ServiceCateloge::create([
+            'name' => $fields['name'],
+            'owner' => $fields['owner'],
+            'description' => $fields['description'],
+            'status' => $fields['status'],
+            'hours' => $fields['hours'],
+            'inputs' => $fields['inputs'],
+            'outputs' => $fields['outputs'],
+            'consumers' => $fields['consumers'],
+            'processes' => $fields['processes'],
+        ]);
+        $response = [
+            'AdvisorySource' => $AdvisorySource,
+        ];
+        return response($response, 201);
     }
 }

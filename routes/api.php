@@ -4,9 +4,14 @@ use App\Http\Controllers\AdvisorySourceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\UseCaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, PATCH, DELETE');
+header('Access-Control-Allow-Headers: Accept, Content-Type, X-Auth-Token, Origin, Authorization');
 
 # login & register & logout & approval
 Route::post('/register', [AuthController::class, 'register']);
@@ -17,10 +22,10 @@ Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
 Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
-# Uses Cases
+# Forums
 Route::resource('/usecases', UseCaseController::class);
 Route::resource('/advisorysource', AdvisorySourceController::class);
-
+Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
 
 //Route::resource('/products', ProductController::class);

@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('service_cateloges', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('owner');
+            $table->string('description');
+            $table->string('status');
+            $table->string('hours');
+            $table->string('inputs');
+            $table->string('outputs');
+            $table->string('consumers');
+            $table->string('processes');
             $table->timestamps();
         });
     }
