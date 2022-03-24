@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvisorySourceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\ProductController;
@@ -18,6 +19,7 @@ Route::put('/orgs', [OrgStructureController::class, 'update']);
 
 # Uses Cases
 Route::resource('/usecases', UseCaseController::class);
+Route::resource('/advisorysource', AdvisorySourceController::class);
 
 
 
