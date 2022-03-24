@@ -15,13 +15,11 @@ header('Access-Control-Allow-Headers: Accept, Content-Type, X-Auth-Token, Origin
 
 # login & register & logout & approval
 
-Route::get('/hello', function () {
-    return "hello heroku";
-});
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
+Route::get('/users', [AuthController::class, 'users']);
 
 # Org
 Route::resource('/orgs', OrgStructureController::class);

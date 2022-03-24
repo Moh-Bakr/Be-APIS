@@ -68,6 +68,11 @@ class AuthController extends Controller
         ];
     }
 
+    public function users()
+    {
+        return User::get()->all();
+    }
+
     public function approve_user_by_email(Request $request)
     {
         try {
