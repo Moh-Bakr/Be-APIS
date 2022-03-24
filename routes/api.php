@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 //header('Access-Control-Allow-Origin:  *');
 //header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
 //header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+
+
 # login & register & logout & approval
 //Route::options('{any?}', function (){
 //    return response('',200);
@@ -27,6 +29,7 @@ Route::get('/users', [AuthController::class, 'users']);
 # Org
 //Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
+Route::post('/orgs', [OrgStructureController::class, 'store']);
 
 Route::middleware(['cors'])->group(function () {
     Route::get('/orgs', [OrgStructureController::class,'index']);
