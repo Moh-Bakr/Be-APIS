@@ -14,14 +14,13 @@ class AuthController extends Controller
             $fields = $request->validate([
                 'name' => 'required|string',
                 'role' => 'string',
-                'phone' => 'required|integer|min:8|max:20',
+                'phone' => 'required|integer|min:8',
                 'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed'
             ]);
         } catch (\Illuminate\Validation\ValidationException $th) {
             return $th->validator->errors();
         }
-
         $user = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
@@ -46,7 +45,6 @@ class AuthController extends Controller
         } catch (\Illuminate\Validation\ValidationException $th) {
             return $th->validator->errors();
         }
-
         $user = User::where('email', $fields['email'])->first();
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
@@ -61,13 +59,14 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-//    public function approve_user_by_id(Request $request, $id)
-//    {
-//        $user = User::find($id);
-//        $user->update($request->all());
-//        return $user;
-//
-//    }
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Logged out'
+        ];
+    }
 
     public function approve_user_by_email(Request $request)
     {
@@ -84,13 +83,5 @@ class AuthController extends Controller
 
     }
 
-    public function logout(Request $request)
-    {
-        auth()->user()->tokens()->delete();
-
-        return [
-            'message' => 'Logged out'
-        ];
-    }
 
 }
