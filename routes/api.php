@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 //header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
 //header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 # login & register & logout & approval
-Route::options('{any?}', function (){
-    return response('',200);
-})->where('any', '.*');
+//Route::options('{any?}', function (){
+//    return response('',200);
+//})->where('any', '.*');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -25,9 +25,12 @@ Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
 Route::get('/users', [AuthController::class, 'users']);
 
 # Org
-Route::resource('/orgs', OrgStructureController::class);
+//Route::resource('/orgs', OrgStructureController::class);
 Route::put('/orgs', [OrgStructureController::class, 'update']);
 
+Route::group(['middleware' => ['cors']], function () {
+    Route::resource('/orgs', OrgStructureController::class);
+});
 # Forums
 Route::resource('/usecases', UseCaseController::class);
 Route::resource('/advisorysource', AdvisorySourceController::class);
