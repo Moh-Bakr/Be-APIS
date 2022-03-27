@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('a_lerts', function (Blueprint $table) {
             $table->id();
+            $table->string('number');
+            $table->string('name');
+            $table->string('StartTime');
+            $table->string('description');
+            $table->string('ActionTaken');
+            $table->string('NextAction');
+            $table->string('who');
+            $table->string('status');
+            $table->string('CloseTime');
             $table->timestamps();
         });
     }

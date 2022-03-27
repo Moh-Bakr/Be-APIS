@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdvisorySourceController;
+use App\Http\Controllers\ALertsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DailyHealthCheckController;
+use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
+use App\Http\Controllers\PendingIssuesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\SystemHealthIssueController;
@@ -46,6 +49,9 @@ Route::middleware(['cors'])->group(function () {
 
     Route::resource('/healthcheck', DailyHealthCheckController::class);
     Route::resource('/healthissue', SystemHealthIssueController::class);
+    Route::resource('/ALerts', ALertsController::class);
+    Route::resource('/Incidents', IncidentsController::class);
+    Route::resource('/PendingIssues', PendingIssuesController::class);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);

@@ -32,7 +32,7 @@ class SystemHealthIssueController extends Controller
         } catch (ValidationException $th) {
             return $th->validator->errors();
         }
-        $HealthCheck = SystemHealthIssue::create([
+        $SystemHealthIssue = SystemHealthIssue::create([
             'component' => $fields['component'],
             'ip' => $fields['ip'],
             'Hostname' => $fields['Hostname'],
@@ -45,7 +45,7 @@ class SystemHealthIssueController extends Controller
             'CloseTime' => $fields['CloseTime'],
         ]);
         $response = [
-            'HealthCheck' => $HealthCheck,
+            'SystemHealthIssue' => $SystemHealthIssue,
         ];
         return response($response, 201);
     }

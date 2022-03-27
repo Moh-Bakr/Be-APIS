@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('pending_issues', function (Blueprint $table) {
             $table->id();
+            $table->string('issue');
+            $table->string('description');
+            $table->string('StartTime');
+            $table->string('ActionTaken');
+            $table->string('NextAction');
+            $table->string('who');
+            $table->string('status');
+            $table->string('CloseTime');
             $table->timestamps();
         });
     }
