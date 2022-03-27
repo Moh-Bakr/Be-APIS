@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 //Route::resource('/orgs', OrgStructureController::class);
 
 Route::middleware(['cors'])->group(function () {
-    
+
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 
