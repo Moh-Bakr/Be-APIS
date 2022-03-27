@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\AdvisorySourceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DailyHealthCheckController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceCatelogeController;
+use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\LaravelIgnition\Http\Controllers\HealthCheckController;
 
 //header("Cache-Control: no-cache, must-revalidate");
 //header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -40,6 +43,9 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/usecases', UseCaseController::class);
     Route::resource('/advisorysource', AdvisorySourceController::class);
     Route::resource('/servicecateloge', ServiceCatelogeController::class);
+
+    Route::resource('/healthcheck', DailyHealthCheckController::class);
+    Route::resource('/healthissue', SystemHealthIssueController::class);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
