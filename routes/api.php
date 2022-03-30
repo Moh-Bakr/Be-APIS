@@ -9,7 +9,10 @@ use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PendingIssuesController;
+use App\Http\Controllers\PoliciesPDFController;
+use App\Http\Controllers\ProceduresPDFController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportsPDFController;
 use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
@@ -49,10 +52,13 @@ Route::middleware(['cors'])->group(function () {
     Route::post('/Communication', [CommunicationController::class, 'store']);
 
     Route::resource('/Staff', StaffController::class);
-    Route::put('/Staff', [StaffController::class,'update']);
-    Route::delete('/Staff', [StaffController::class,'destroy']);
+    Route::put('/Staff', [StaffController::class, 'update']);
+    Route::delete('/Staff', [StaffController::class, 'destroy']);
 
-    Route::resource('/PDF', PDFController::class);
+//    Route::resource('/PDF', PDFController::class);
+    Route::resource('/ReportsPDF', ReportsPDFController::class);
+    Route::resource('/PoliciesPDF', PoliciesPDFController::class);
+    Route::resource('/ProceduresPDF', ProceduresPDFController::class);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
