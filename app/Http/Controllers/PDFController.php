@@ -16,7 +16,7 @@ class PDFController extends Controller
     public function store(Request $req)
     {
         $req->validate([
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png|max:2048'
         ]);
         $fileModel = new PDF;
         if ($req->file()) {
