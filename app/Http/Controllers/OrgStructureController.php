@@ -42,6 +42,5 @@ class OrgStructureController extends Controller
         $org = OrgStructure::find($request->id);
         $org->update(['org' => $fields['org']]);
         return $org;
-
     }
 }

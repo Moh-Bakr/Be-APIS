@@ -3,33 +3,22 @@
 use App\Http\Controllers\AdvisorySourceController;
 use App\Http\Controllers\ALertsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DailyHealthCheckController;
 use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\PendingIssuesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceCatelogeController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
+use App\Http\Resources\CommunicationResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelIgnition\Http\Controllers\HealthCheckController;
 
-//header("Cache-Control: no-cache, must-revalidate");
-//header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-//header('Access-Control-Allow-Origin:  *');
-//header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
-//header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
-
-
-# login & register & logout & approval
-//Route::options('{any?}', function (){
-//    return response('',200);
-//})->where('any', '.*');
-
-
-# Org
-//Route::resource('/orgs', OrgStructureController::class);
 
 Route::middleware(['cors'])->group(function () {
 
@@ -52,6 +41,15 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/ALerts', ALertsController::class);
     Route::resource('/Incidents', IncidentsController::class);
     Route::resource('/PendingIssues', PendingIssuesController::class);
+
+    Route::get('/Communication', function () {
+        return CommunicationResource::collection(\App\Models\Communication::get()->all());
+    });
+    Route::post('/Communication', [CommunicationController::class, 'store']);
+
+    Route::resource('/Staff', StaffController::class);
+    Route::put('/Staff', [StaffController::class,'update']);
+    Route::delete('/Staff', [StaffController::class,'destroy']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
