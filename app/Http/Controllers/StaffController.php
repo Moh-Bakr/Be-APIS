@@ -54,6 +54,11 @@ class StaffController extends Controller
 
     public function destroy(Request $request)
     {
-        return Staff::destroy($request->id);
+        $Staff = Staff::find($request->id);
+        if ($Staff == NULL) {
+            return "THere is no staff with id " . $request->id;
+        }
+        Staff::destroy($request->id);
+        return "Deleted Successfully " . $request->id;
     }
 }
