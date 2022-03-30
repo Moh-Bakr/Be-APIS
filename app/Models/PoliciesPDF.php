@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class PoliciesPDF extends Model
 {
     protected $fillable = [
+        'title',
         'name',
         'file_path'
     ];

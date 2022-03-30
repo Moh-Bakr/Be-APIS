@@ -56,9 +56,17 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/Staff', [StaffController::class, 'destroy']);
 
 //    Route::resource('/PDF', PDFController::class);
+//    Route::delete('/PDF', [PDFController::class, 'destroy']);
+
     Route::resource('/ReportsPDF', ReportsPDFController::class);
+    Route::delete('/ReportsPDF', [ReportsPDFController::class, 'destroy']);
+
     Route::resource('/PoliciesPDF', PoliciesPDFController::class);
+    Route::delete('/PoliciesPDF', [PoliciesPDFController::class, 'destroy']);
+
     Route::resource('/ProceduresPDF', ProceduresPDFController::class);
+    Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
+
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);

@@ -75,15 +75,8 @@ class AuthController extends Controller
 
     public function approve_user_by_email(Request $request)
     {
-        try {
-            $fields = $request->validate([
-                'role' => 'required|string',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
-            return $th->validator->errors();
-        }
         $user = User::where('email', $request->email)->first();
-        $user->update(['role' => $fields['role']]);
+        $user->update(['role' => 'Employee']);
         return $user;
 
     }
