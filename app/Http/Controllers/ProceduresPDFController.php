@@ -6,6 +6,7 @@ use App\Models\PoliciesPDF;
 use App\Models\ProceduresPDF;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ProceduresPDFController extends Controller
 {
@@ -16,10 +17,14 @@ class ProceduresPDFController extends Controller
 
     public function store(Request $req)
     {
-        $req->validate([
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg',
-            'title' => 'required|string',
-        ]);
+        try {
+            $req->validate([
+                'title' => 'required|string',
+                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
         $fileModel = new ProceduresPDF;
         if ($req->file()) {
             $fileModel->title = $req->title;

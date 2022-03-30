@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\PDF;
 use File;
+use Illuminate\Validation\ValidationException;
 use Storage;
 use Validator;
 use Illuminate\Http\Request;
@@ -18,10 +19,15 @@ class PDFController extends Controller
 
     public function store(Request $req)
     {
-        $req->validate([
-            'title' => 'required|string',
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
-        ]);
+        try {
+            $req->validate([
+                'title' => 'required|string',
+                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
+
         $fileModel = new PDF;
         if ($req->file()) {
             $fileModel->title = $req->title;
