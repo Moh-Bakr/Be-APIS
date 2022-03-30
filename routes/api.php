@@ -7,6 +7,7 @@ use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DailyHealthCheckController;
 use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PendingIssuesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceCatelogeController;
@@ -50,6 +51,8 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/Staff', StaffController::class);
     Route::put('/Staff', [StaffController::class,'update']);
     Route::delete('/Staff', [StaffController::class,'destroy']);
+
+    Route::resource('/PDF', PDFController::class);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
