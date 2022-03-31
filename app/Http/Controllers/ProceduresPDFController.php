@@ -17,18 +17,18 @@ class ProceduresPDFController extends Controller
 
     public function store(Request $req)
     {
-//        try {
-//            $req->validate([
-//                'title' => 'required|string',
-//                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
-//            ]);
-//        } catch (ValidationException $th) {
-//            return $th->validator->errors();
-//        }
+        try {
+            $req->validate([
+                'title' => 'required|string',
+                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $fileModel = new PoliciesPDF;
         $api = 'https://beapis.herokuapp.com';
-        $fileModel = new ProceduresPDF;
         if ($req->file()) {
-            $fileModel->title = $req->file->getClientOriginalName();
+            $fileModel->title = $req->title;
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('ProceduresPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
@@ -37,6 +37,7 @@ class ProceduresPDFController extends Controller
             $fileModel->save();
 
             return [
+                'id' => $fileModel->id,
                 'title' => $fileModel->title,
                 'name' => $fileModel->name,
                 'file_path' => $fileModel->file_path,

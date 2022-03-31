@@ -25,18 +25,22 @@ class ReportsPDFController extends Controller
             return $th->validator->errors();
         }
         $fileModel = new ReportsPDF;
+        $api = 'https://beapis.herokuapp.com';
         if ($req->file()) {
             $fileModel->title = $req->title;
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('ReportsPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->url = $api . $fileModel->file_path;
             $fileModel->save();
 
             return [
+                'id' => $fileModel->id,
                 'title' => $fileModel->title,
                 'name' => $fileModel->name,
                 'file_path' => $fileModel->file_path,
+                'url' => $fileModel->url,
             ];
         }
     }

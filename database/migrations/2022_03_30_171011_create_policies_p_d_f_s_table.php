@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('name');
             $table->string('file_path');
+            $table->string('url');
             $table->timestamps();
         });
     }

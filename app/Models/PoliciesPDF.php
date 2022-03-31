@@ -12,7 +12,8 @@ class PoliciesPDF extends Model
     protected $fillable = [
         'title',
         'name',
-        'file_path'
+        'file_path',
+        'url'
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }
