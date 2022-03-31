@@ -17,14 +17,14 @@ class ProceduresPDFController extends Controller
 
     public function store(Request $req)
     {
-        try {
-            $req->validate([
-                'title' => 'required|string',
-                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
-            ]);
-        } catch (ValidationException $th) {
-            return $th->validator->errors();
-        }
+//        try {
+//            $req->validate([
+//                'title' => 'required|string',
+//                'file' => 'required|mimes:csv,txt,xlx,xls,pdf,png,jpg,jpeg'
+//            ]);
+//        } catch (ValidationException $th) {
+//            return $th->validator->errors();
+//        }
         $fileModel = new ProceduresPDF;
         if ($req->file()) {
             $fileModel->title = $req->title;
