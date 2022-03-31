@@ -34,7 +34,11 @@ class ProceduresPDFController extends Controller
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->save();
 
-            return ('File has been uploaded.');
+            return [
+                'title' => $fileModel->title,
+                'name' => $fileModel->name,
+                'file_path' => $fileModel->file_path,
+            ];
         }
     }
     public function destroy(Request $request)
