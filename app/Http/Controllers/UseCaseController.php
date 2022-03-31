@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UseCase;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class UseCaseController extends Controller
 {
@@ -29,8 +30,9 @@ class UseCaseController extends Controller
                 'priority' => 'required|string',
                 'playbook' => 'required|string',
                 'production' => 'required|string',
+                'testing' => 'required|string',
             ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
+        } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $use_cases = UseCase::create([
@@ -47,6 +49,7 @@ class UseCaseController extends Controller
             'priority' => $fields['priority'],
             'playbook' => $fields['playbook'],
             'production' => $fields['production'],
+            'testing' => $fields['testing'],
         ]);
         $response = [
             'use_cases' => $use_cases,

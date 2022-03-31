@@ -5,6 +5,7 @@ use App\Http\Controllers\ALertsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DailyHealthCheckController;
+use App\Http\Controllers\IncidentGController;
 use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\PDFController;
@@ -18,6 +19,9 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
 use App\Http\Resources\CommunicationResource;
+use App\Http\Resources\IncidentGResource;
+use App\Models\Communication;
+use App\Models\IncidentG;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +51,15 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/PendingIssues', PendingIssuesController::class);
 
     Route::get('/Communication', function () {
-        return CommunicationResource::collection(\App\Models\Communication::get()->all());
+        return CommunicationResource::collection(Communication::get()->all());
     });
     Route::post('/Communication', [CommunicationController::class, 'store']);
+
+
+    Route::get('/IncidentG', function () {
+        return IncidentGResource::collection(IncidentG::get()->all());
+    });
+    Route::post('/IncidentG', [IncidentGController::class, 'store']);
 
     Route::resource('/Staff', StaffController::class);
     Route::put('/Staff', [StaffController::class, 'update']);
@@ -74,12 +84,7 @@ Route::middleware(['cors'])->group(function () {
 
 });
 
-# Forums
 
-//Route::group(['middleware' => ['cors']], function () {
-//    Route::resource('/orgs', OrgStructureController::class);
-//
-//});
 //Route::resource('/products', ProductController::class);
 //Route::get('/products', [ProductController::class, 'index']);
 //Route::get('/products/{id}', [ProductController::class, 'show']);

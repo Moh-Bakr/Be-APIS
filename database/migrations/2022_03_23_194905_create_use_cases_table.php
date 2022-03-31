@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->string('priority');
             $table->string('playbook');
             $table->string('production');
+            $table->string('testing');
             $table->timestamps();
         });
     }

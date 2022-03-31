@@ -12,7 +12,7 @@ class UseCase extends Model
     protected $fillable = [
         'identifier','purpose','risk','type','stakeholders',
         'requirements','logic','output','volume','falsepositive',
-        'priority','playbook','production'
+        'priority','playbook','production','testing'
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }
