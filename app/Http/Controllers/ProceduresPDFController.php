@@ -27,7 +27,7 @@ class ProceduresPDFController extends Controller
 //        }
         $fileModel = new ProceduresPDF;
         if ($req->file()) {
-            $fileModel->title = $req->title;
+//            $fileModel->title = $req->title;
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('ProceduresPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
