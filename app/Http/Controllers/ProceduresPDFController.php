@@ -25,22 +25,26 @@ class ProceduresPDFController extends Controller
 //        } catch (ValidationException $th) {
 //            return $th->validator->errors();
 //        }
+        $api = 'https://beapis.herokuapp.com';
         $fileModel = new ProceduresPDF;
         if ($req->file()) {
-//            $fileModel->title = $req->title;
+            $fileModel->title = $req->file->getClientOriginalName();
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('ProceduresPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->url = $api . $fileModel->file_path;
             $fileModel->save();
 
             return [
                 'title' => $fileModel->title,
                 'name' => $fileModel->name,
                 'file_path' => $fileModel->file_path,
+                'url' => $fileModel->url,
             ];
         }
     }
+
     public function destroy(Request $request)
     {
         $pdf = ProceduresPDF::find($request->id);

@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('procedures_p_d_f_s', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('name');
             $table->string('file_path');
+            $table->string('url');
             $table->timestamps();
         });
     }
