@@ -50,7 +50,7 @@ class ProceduresPDFController extends Controller
     {
         $pdf = ProceduresPDF::find($request->id);
         if ($pdf != NULL) {
-            if (File::exists(public_path($pdf->file_path))) {
+            if (ProceduresPDF::exists(public_path($pdf->file_path))) {
                 File::delete(public_path($pdf->file_path));
                 ProceduresPDF::destroy($request->id);
                 return 'File Has Been Deleted';
