@@ -25,7 +25,7 @@ class ProceduresPDFController extends Controller
         } catch (ValidationException $th) {
             return $th->validator->errors();
         }
-        $fileModel = new PoliciesPDF;
+        $fileModel = new ProceduresPDF;
         $api = 'https://beapis.herokuapp.com';
         if ($req->file()) {
             $fileModel->title = $req->title;
