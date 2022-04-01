@@ -49,7 +49,7 @@ class ReportsPDFController extends Controller
     {
         $pdf = ReportsPDF::find($request->id);
         if ($pdf != NULL) {
-            if (File::exists(public_path($pdf->file_path))) {
+            if (ReportsPDF::exists(public_path($pdf->file_path))) {
                 File::delete(public_path($pdf->file_path));
                 ReportsPDF::destroy($request->id);
                 return 'File Has Been Deleted';
