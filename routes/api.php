@@ -51,13 +51,13 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/PendingIssues', PendingIssuesController::class);
 
     Route::get('/Communication', function () {
-        return CommunicationResource::collection(Communication::get()->all());
+        return CommunicationResource::collection(Communication::get())->all();
     });
     Route::post('/Communication', [CommunicationController::class, 'store']);
 
 
     Route::get('/IncidentG', function () {
-        return IncidentGResource::collection(IncidentG::get()->all());
+        return IncidentGResource::collection(IncidentG::get())->all();
     });
     Route::post('/IncidentG', [IncidentGController::class, 'store']);
 
