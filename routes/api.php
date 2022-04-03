@@ -18,9 +18,10 @@ use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
-use App\Http\Resources\CommunicationResource;
+use App\Http\Resources\HealthResource;
 use App\Http\Resources\IncidentGResource;
 use App\Models\Communication;
+use App\Models\DailyHealthCheck;
 use App\Models\IncidentG;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,14 +45,17 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/advisorysource', AdvisorySourceController::class);
     Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
-    Route::resource('/healthcheck', DailyHealthCheckController::class);
-    Route::resource('/healthissue', SystemHealthIssueController::class);
+    Route::post('/HealthCheck', [DailyHealthCheckController::class,'store']);
+    Route::get('/HealthCheck', function () {
+        return HealthResource::collection(DailyHealthCheck::get())->all();
+    });
+//    Route::resource('/healthissue', SystemHealthIssueController::class);
     Route::resource('/ALerts', ALertsController::class);
     Route::resource('/Incidents', IncidentsController::class);
     Route::resource('/PendingIssues', PendingIssuesController::class);
 
     Route::get('/Communication', function () {
-        return CommunicationResource::collection(Communication::get())->all();
+        return HealthResource::collection(Communication::get())->all();
     });
     Route::post('/Communication', [CommunicationController::class, 'store']);
 

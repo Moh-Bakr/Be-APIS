@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdvisorySource;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AdvisorySourceController extends Controller
 {
@@ -20,11 +21,11 @@ class AdvisorySourceController extends Controller
                 'date' => 'required|string',
                 'referenceid' => 'required|string',
                 'description' => 'required|string',
-                'applicable' => 'required|boolean',
-                'token' => 'required|string',
+                'applicable' => 'required|string',
+                'token' => '',
                 'notes' => 'required|string',
             ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
+        } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $AdvisorySource = AdvisorySource::create([
@@ -33,7 +34,7 @@ class AdvisorySourceController extends Controller
             'referenceid' => $fields['referenceid'],
             'description' => $fields['description'],
             'applicable' => $fields['applicable'],
-            'token' => $fields['token'],
+            'token' => $fields['token'] ?? NULL,
             'notes' => $fields['notes'],
         ]);
         $response = [

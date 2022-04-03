@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('date');
             $table->string('referenceid');
             $table->string('description');
-            $table->boolean('applicable');
-            $table->string('token');
+            $table->string('applicable');
+            $table->string('token')->nullable();
             $table->string('notes');
             $table->timestamps();
         });

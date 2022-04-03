@@ -10,9 +10,19 @@ use Laravel\Sanctum\HasApiTokens;
 class DailyHealthCheck extends Model
 {
     protected $fillable = [
-        'description',
-        'status',
-        'issuesfound',
+        'Description',
+        'Status',
+        'IssuesFound',
+        'Component',
+        'Ip',
+        'Hostname',
+        'StartTime',
+        'IssueDescription',
+        'ActionTaken',
+        'NextAction',
+        'Who',
+        'IssueStatus',
+        'CloseTime',
     ];
     use HasApiTokens, HasFactory, Notifiable;
     use HasFactory;
