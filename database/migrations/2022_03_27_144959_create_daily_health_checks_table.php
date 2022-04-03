@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('Description');
             $table->string('Status');
-            $table->string('IssuesFound');
+            $table->string('IssuesFound')->nullable();
             $table->string('Component')->nullable();
             $table->string('Ip')->nullable();
             $table->string('Hostname')->nullable();
