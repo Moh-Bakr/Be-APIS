@@ -18,6 +18,7 @@ use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
+use App\Http\Resources\CommunicationResource;
 use App\Http\Resources\HealthResource;
 use App\Http\Resources\IncidentGResource;
 use App\Models\Communication;
@@ -55,7 +56,7 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/PendingIssues', PendingIssuesController::class);
 
     Route::get('/Communication', function () {
-        return HealthResource::collection(Communication::get())->all();
+        return CommunicationResource::collection(Communication::get())->all();
     });
     Route::post('/Communication', [CommunicationController::class, 'store']);
 
