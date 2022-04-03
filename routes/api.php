@@ -55,16 +55,16 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/Incidents', IncidentsController::class);
     Route::resource('/PendingIssues', PendingIssuesController::class);
 
-    Route::get('/Communication', function () {
-        return CommunicationResource::collection(Communication::get())->all();
-    });
-    Route::post('/Communication', [CommunicationController::class, 'store']);
+//    Route::get('/Communication', function () {
+//        return CommunicationResource::collection(Communication::get())->all();
+//    });
+    Route::resource('/Communication', CommunicationController::class);
 
 
-    Route::get('/IncidentG', function () {
-        return IncidentGResource::collection(IncidentG::get())->all();
-    });
-    Route::post('/IncidentG', [IncidentGController::class, 'store']);
+//    Route::get('/IncidentG', function () {
+//        return IncidentGResource::collection(IncidentG::get())->all();
+//    });
+    Route::resource('/IncidentG', IncidentGController::class);
 
     Route::resource('/Staff', StaffController::class);
     Route::put('/Staff', [StaffController::class, 'update']);

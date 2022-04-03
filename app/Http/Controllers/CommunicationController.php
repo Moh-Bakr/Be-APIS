@@ -8,6 +8,10 @@ use Illuminate\Validation\ValidationException;
 
 class CommunicationController extends Controller
 {
+    public function index()
+    {
+        return Communication::get()->all();
+    }
     public function store(Request $request)
     {
         try {

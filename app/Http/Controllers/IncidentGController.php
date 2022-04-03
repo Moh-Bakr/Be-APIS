@@ -8,6 +8,11 @@ use Illuminate\Validation\ValidationException;
 
 class IncidentGController extends Controller
 {
+    public function index()
+    {
+        return IncidentG::get()->all();
+    }
+
     public function store(Request $request)
     {
         try {
