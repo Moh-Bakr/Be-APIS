@@ -18,8 +18,5 @@ class AdvisorySource extends Model
         'token',
         'notes',
     ];
-    protected $casts = [
-        'applicable' => 'boolean',
-    ];
     use HasApiTokens, HasFactory, Notifiable;
 }
