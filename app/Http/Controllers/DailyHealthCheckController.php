@@ -8,10 +8,10 @@ use Illuminate\Validation\ValidationException;
 
 class DailyHealthCheckController extends Controller
 {
-//    public function index()
-//    {
-//        return DailyHealthCheck::get()->all();
-//    }
+    public function index()
+    {
+        return DailyHealthCheck::get()->all();
+    }
 
     public function store(Request $request)
     {

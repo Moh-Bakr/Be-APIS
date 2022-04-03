@@ -46,10 +46,10 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/advisorysource', AdvisorySourceController::class);
     Route::resource('/servicecateloge', ServiceCatelogeController::class);
 
-    Route::post('/HealthCheck', [DailyHealthCheckController::class,'store']);
-    Route::get('/HealthCheck', function () {
-        return HealthResource::collection(DailyHealthCheck::get())->all();
-    });
+    Route::resource('/HealthCheck', DailyHealthCheckController::class);
+//    Route::get('/HealthCheck', function () {
+//        return HealthResource::collection(DailyHealthCheck::get())->all();
+//    });
 //    Route::resource('/healthissue', SystemHealthIssueController::class);
     Route::resource('/ALerts', ALertsController::class);
     Route::resource('/Incidents', IncidentsController::class);
