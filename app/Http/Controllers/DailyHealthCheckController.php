@@ -49,9 +49,9 @@ class DailyHealthCheckController extends Controller
             'IssueStatus' => $fields['IssueStatus'] ?? NULL,
             'CloseTime' => $fields['CloseTime'] ?? NULL,
         ]);
-//        $response = [
-//            'HealthCheck' => $HealthCheck,
-//        ];
-        return response('Created Successfully', 201);
+        $response = [
+            'DailyHealthCheck' => "Created Successfully",
+        ];
+        return response($response, 201);
     }
 }
