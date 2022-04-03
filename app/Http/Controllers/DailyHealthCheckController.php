@@ -19,7 +19,7 @@ class DailyHealthCheckController extends Controller
             $fields = $request->validate([
                 'Description' => 'required|string',
                 'Status' => 'required|string',
-                'IssuesFound' => 'required|string',
+                'IssuesFound' => '',
                 'Component' => '',
                 'Ip' => '',
                 'Hostname' => '',
@@ -37,7 +37,7 @@ class DailyHealthCheckController extends Controller
         DailyHealthCheck::create([
             'Description' => $fields['Description'],
             'Status' => $fields['Status'],
-            'IssuesFound' => $fields['IssuesFound'],
+            'IssuesFound' => $fields['IssuesFound'] ?? NULL,
             'Component' => $fields['Component'] ?? NULL,
             'Ip' => $fields['Ip'] ?? NULL,
             'Hostname' => $fields['Hostname'] ?? NULL,
