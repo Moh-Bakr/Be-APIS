@@ -10,6 +10,7 @@ use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PendingIssuesController;
+use App\Http\Controllers\PlayBookController;
 use App\Http\Controllers\PoliciesPDFController;
 use App\Http\Controllers\ProceduresPDFController;
 use App\Http\Controllers\ProductController;
@@ -82,6 +83,7 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/ProceduresPDF', ProceduresPDFController::class);
     Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
 
+    Route::resource('/PlayBook', PlayBookController::class);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
