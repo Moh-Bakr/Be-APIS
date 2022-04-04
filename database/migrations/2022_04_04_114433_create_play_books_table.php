@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('play_books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('category');
+            $table->string('description');
+            $table->string('data');
             $table->string('name');
             $table->string('file_path');
             $table->string('url');
-            $table->string('description');
-            $table->string('data');
-            $table->string('category');
             $table->timestamps();
         });
     }
