@@ -17,7 +17,9 @@ class PlayBookController extends Controller
     {
         try {
             $req->validate([
+                'title' => 'required|string',
                 'description' => 'required|string',
+                'category' => 'required|string',
                 'data' => 'required|string',
                 'file' => 'required|image'
             ]);
@@ -27,7 +29,8 @@ class PlayBookController extends Controller
         $fileModel = new PlayBook;
         $api = 'https://beapis.herokuapp.com';
         if ($req->file()) {
-            $fileModel->title = $req->file->getClientOriginalName();
+            $fileModel->title = $req->title;
+            $fileModel->category = $req->category;
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('PlayBook', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();

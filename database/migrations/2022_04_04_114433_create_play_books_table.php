@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('description');
             $table->string('data');
+            $table->string('category');
             $table->timestamps();
         });
     }

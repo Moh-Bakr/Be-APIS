@@ -14,7 +14,8 @@ class PlayBook extends Model
         'name',
         'file_path',
         'description',
-        'data'
+        'data',
+        'category'
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }
