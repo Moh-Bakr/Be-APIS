@@ -17,12 +17,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportsPDFController;
 use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\ShiftsController;
+use App\Http\Controllers\ShifttestController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
 use App\Http\Resources\CommunicationResource;
 use App\Http\Resources\HealthResource;
-use App\Http\Resources\IncidentGResource;
+use App\Http\Resources\ShiftsResource;
 use App\Models\Communication;
 use App\Models\DailyHealthCheck;
 use App\Models\IncidentG;
@@ -72,8 +73,9 @@ Route::middleware(['cors'])->group(function () {
     Route::put('/Staff', [StaffController::class, 'update']);
     Route::delete('/Staff', [StaffController::class, 'destroy']);
 
-    Route::resource('/Shifts', ShiftsController::class);
-    Route::put('/Shifts', [ShiftsController::class, 'update']);
+//    Route::resource('/Shifts', ShiftsController::class);
+    Route::resource('/Shifts', shifttestController::class);
+//    Route::put('/Shifts', [ShiftsController::class, 'update']);
 
 //    Route::resource('/PDF', PDFController::class);
 //    Route::delete('/PDF', [PDFController::class, 'destroy']);
