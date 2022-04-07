@@ -18,10 +18,10 @@ class ShifttestController extends Controller
 //            ->select('month', 'name', 'shifts')
 //            ->groupBy('month', 'name')->orderBy('name')
 //            ->get()->all();
+        //        return ShiftsResource::collection($users);
+
         $products = shifttest::all();
         return $products->groupBy('month');
-
-//        return ShiftsResource::collection($users);
     }
 
     public function store(Request $request)
@@ -47,14 +47,15 @@ class ShifttestController extends Controller
 
     }
 
-//    public function update(Request $request)
-//    {
-//        $id = 1;
-//        $shifts = shifttest::find($id);
-//        if ($shifts == NULL) {
-//            return "THere is no staff with id " . $request->id;
-//        }
-//        $shifts->update($request->all());
-//        return $shifts;
-//    }
+    public function update(Request $request)
+    {
+        $shiftsname = shifttest::where('name', $request->name)->first();
+        if ($shiftsname == NULL) {
+            return "THere is no user with this name " . $request->id;
+        } else {
+            $shifts = shifttest::where('month', $request->month)->first();
+            $shifts->update(['shifts' => $request->shifts]);
+        }
+        return $shifts;
+    }
 }

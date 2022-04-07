@@ -75,7 +75,7 @@ Route::middleware(['cors'])->group(function () {
 
 //    Route::resource('/Shifts', ShiftsController::class);
     Route::resource('/Shifts', shifttestController::class);
-//    Route::put('/Shifts', [ShiftsController::class, 'update']);
+    Route::put('/Shifts', [shifttestController::class, 'update']);
 
 //    Route::resource('/PDF', PDFController::class);
 //    Route::delete('/PDF', [PDFController::class, 'destroy']);
