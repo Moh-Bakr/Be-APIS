@@ -16,6 +16,7 @@ use App\Http\Controllers\ProceduresPDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportsPDFController;
 use App\Http\Controllers\ServiceCatelogeController;
+use App\Http\Controllers\ShiftsController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
@@ -70,6 +71,9 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/Staff', StaffController::class);
     Route::put('/Staff', [StaffController::class, 'update']);
     Route::delete('/Staff', [StaffController::class, 'destroy']);
+
+    Route::resource('/Shifts', ShiftsController::class);
+    Route::put('/Shifts', [ShiftsController::class, 'update']);
 
 //    Route::resource('/PDF', PDFController::class);
 //    Route::delete('/PDF', [PDFController::class, 'destroy']);
