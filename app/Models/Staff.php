@@ -16,6 +16,7 @@ class Staff extends Model
         'Email',
         'Mobile',
         'Phone',
+        'child',
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }

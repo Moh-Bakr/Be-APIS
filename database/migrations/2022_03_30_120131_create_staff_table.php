@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('Email')->unique();
             $table->string('Mobile');
             $table->string('Phone');
+            $table->boolean('child');
             $table->timestamps();
 
         });

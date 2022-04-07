@@ -23,6 +23,7 @@ class StaffController extends Controller
                 'Email' => 'required|string',
                 'Mobile' => 'required|string',
                 'Phone' => 'required|string',
+                'child' => 'required|boolean',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -34,6 +35,7 @@ class StaffController extends Controller
             'Email' => $fields['Email'],
             'Mobile' => $fields['Mobile'],
             'Phone' => $fields['Phone'],
+            'child' => $fields['child'],
         ]);
         $response = [
             'Staff' => $Staff,
