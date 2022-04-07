@@ -20,7 +20,7 @@ class ShifttestController extends Controller
 //            ->get()->all();
         //        return ShiftsResource::collection($users);
 
-        $products = shifttest::all();
+        $products = shifttest::orderBy('month','ASC')->get();;
         return $products->groupBy('month');
     }
 
