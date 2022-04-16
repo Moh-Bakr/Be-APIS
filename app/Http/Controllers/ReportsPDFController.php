@@ -44,7 +44,6 @@ class ReportsPDFController extends Controller
             ];
         }
     }
-
     public function update(Request $request)
     {
         try {
