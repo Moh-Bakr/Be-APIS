@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PoliciesPDF;
 use App\Models\ProceduresPDF;
-use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\ValidationException;
 
 class ProceduresPDFController extends Controller
@@ -43,6 +42,37 @@ class ProceduresPDFController extends Controller
                 'file_path' => $fileModel->file_path,
                 'url' => $fileModel->url,
             ];
+        }
+    }
+    public function update(Request $request)
+    {
+        try {
+            $request->validate([
+                'title' => 'required|string',
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $fileModel = ProceduresPDF::find($request->id);
+        $api = 'https://beapis.herokuapp.com';
+
+        $fileModel->title = $request->title;
+
+
+        if ($request->file()) {
+            if (ProceduresPDF::exists(public_path($fileModel->file_path))) {
+                File::delete(public_path($fileModel->file_path));
+            }
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
+            $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->update();
+            $response = [
+                'message' => 'Updated Successfully',
+            ];
+            return response($response, 201);
         }
     }
 

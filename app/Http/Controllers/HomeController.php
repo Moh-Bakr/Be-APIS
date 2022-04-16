@@ -58,7 +58,6 @@ class HomeController extends Controller
                 'vision' => 'required|string',
                 'mission' => 'required|string',
                 'goal' => 'required|string',
-                'file' => 'required|image'
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();

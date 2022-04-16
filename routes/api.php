@@ -82,18 +82,25 @@ Route::middleware(['cors'])->group(function () {
 //    Route::delete('/PDF', [PDFController::class, 'destroy']);
 
     Route::resource('/ReportsPDF', ReportsPDFController::class);
+    Route::put('/ReportsPDF', [ReportsPDFController::class, 'update']);
     Route::delete('/ReportsPDF', [ReportsPDFController::class, 'destroy']);
 
     Route::resource('/PoliciesPDF', PoliciesPDFController::class);
+    Route::put('/PoliciesPDF', [PoliciesPDFController::class, 'update']);
     Route::delete('/PoliciesPDF', [PoliciesPDFController::class, 'destroy']);
 
     Route::resource('/ProceduresPDF', ProceduresPDFController::class);
+    Route::put('/ProceduresPDF', [ProceduresPDFController::class, 'update']);
     Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
 
     Route::resource('/PlayBook', PlayBookController::class);
+    Route::put('/PlayBook', [PlayBookController::class . 'update']);
+    Route::delete('/PlayBook', [PlayBookController::class, 'destroy']);
+
+
     Route::resource('/Home', HomeController::class);
-    Route::put('/Home', [HomeController::class,'update']);
-    Route::delete('/Home', [HomeController::class,'destroy']);
+    Route::put('/Home', [HomeController::class, 'update']);
+    Route::delete('/Home', [HomeController::class, 'destroy']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReportsPDF;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -42,6 +42,38 @@ class ReportsPDFController extends Controller
                 'file_path' => $fileModel->file_path,
                 'url' => $fileModel->url,
             ];
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+            $request->validate([
+                'title' => 'required|string',
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $fileModel = ReportsPDF::find($request->id);
+        $api = 'https://beapis.herokuapp.com';
+
+        $fileModel->title = $request->title;
+
+
+        if ($request->file()) {
+            if (ReportsPDF::exists(public_path($fileModel->file_path))) {
+                File::delete(public_path($fileModel->file_path));
+            }
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
+            $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->update();
+            $response = [
+                'message' => 'Updated Successfully',
+            ];
+            return response($response, 201);
         }
     }
 

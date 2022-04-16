@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PlayBook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\ValidationException;
 
 class PlayBookController extends Controller
@@ -51,6 +52,59 @@ class PlayBookController extends Controller
 //                'file_path' => $fileModel->file_path,
 //                'url' => $fileModel->url,
 //            ];
+        }
+    }
+    public function update(Request $request)
+    {
+        try {
+            $request->validate([
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'category' => 'required|string',
+                'data' => 'required|string',
+            ]);
+        } catch (ValidationException $th) {
+            return $th->validator->errors();
+        }
+        $fileModel = PlayBook::find($request->id);
+        $api = 'https://beapis.herokuapp.com';
+
+        $fileModel->title = $request->title;
+        $fileModel->description = $request->description;
+        $fileModel->data = $request->data;
+        $fileModel->category = $request->category;
+
+
+        if ($request->file()) {
+            if (PlayBook::exists(public_path($fileModel->file_path))) {
+                File::delete(public_path($fileModel->file_path));
+            }
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
+            $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
+            $fileModel->file_path = '/storage/' . $filePath;
+            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->update();
+            $response = [
+                'message' => 'Updated Successfully',
+            ];
+            return response($response, 201);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $pdf = PlayBook::find($request->id);
+        if ($pdf != NULL) {
+            if (PlayBook::exists(public_path($pdf->file_path))) {
+                File::delete(public_path($pdf->file_path));
+                PlayBook::destroy($request->id);
+                return 'File Has Been Deleted';
+            } else {
+                return 'File Does Not Exists.';
+            }
+        } else {
+            return 'There is No Record Found';
         }
     }
 }
