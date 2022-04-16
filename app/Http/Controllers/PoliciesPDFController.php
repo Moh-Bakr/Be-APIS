@@ -65,7 +65,7 @@ class PoliciesPDFController extends Controller
                 File::delete(public_path($fileModel->file_path));
             }
             $fileName = time() . '_' . $request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
+            $filePath = $request->file('file')->storeAs('PoliciesPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = $api . $fileModel->file_path;

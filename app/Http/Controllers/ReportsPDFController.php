@@ -58,13 +58,12 @@ class ReportsPDFController extends Controller
 
         $fileModel->title = $request->title;
 
-
         if ($request->file()) {
             if (ReportsPDF::exists(public_path($fileModel->file_path))) {
                 File::delete(public_path($fileModel->file_path));
             }
             $fileName = time() . '_' . $request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
+            $filePath = $request->file('file')->storeAs('ReportsPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = $api . $fileModel->file_path;
