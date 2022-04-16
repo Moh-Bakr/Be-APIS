@@ -78,7 +78,13 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         $user->update(['role' => 'Employee']);
         return $user;
+    }
 
+    public function disapprove_user_by_email(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $user->update(['role' => 'visitor']);
+        return $user;
     }
 
 

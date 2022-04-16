@@ -40,6 +40,7 @@ Route::middleware(['cors'])->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
+    Route::put('/disapprove/user', [AuthController::class, 'disapprove_user_by_email']);
     Route::get('/users', [AuthController::class, 'users']);
 
     Route::get('/orgs', [OrgStructureController::class, 'index']);
