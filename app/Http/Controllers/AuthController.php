@@ -70,7 +70,7 @@ class AuthController extends Controller
 
     public function users()
     {
-        return User::get()->all();
+        return User::get()->all()->orderBy('id', 'asc');
     }
 
     public function approve_user_by_email(Request $request)
