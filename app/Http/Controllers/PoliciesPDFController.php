@@ -59,6 +59,5 @@ class PoliciesPDFController extends Controller
         } else {
             return 'There is No Record Found';
         }
-
     }
 }

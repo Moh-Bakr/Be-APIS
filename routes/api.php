@@ -5,6 +5,7 @@ use App\Http\Controllers\ALertsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DailyHealthCheckController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidentGController;
 use App\Http\Controllers\IncidentsController;
 use App\Http\Controllers\OrgStructureController;
@@ -90,6 +91,9 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
 
     Route::resource('/PlayBook', PlayBookController::class);
+    Route::resource('/Home', HomeController::class);
+    Route::put('/Home', [HomeController::class,'update']);
+    Route::delete('/Home', [HomeController::class,'destroy']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
