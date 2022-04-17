@@ -96,6 +96,12 @@ class AuthController extends Controller
 
     public function approve_user_by_email(Request $request)
     {
+        if ($request->email == "admin@gmail.com") {
+            $response = [
+                'message' => "Cannot Change Role",
+            ];
+            return response($response, 201);
+        }
         $user = User::where('email', $request->email)->first();
         $user->update(['role' => 'Employee']);
         return $user;
@@ -103,6 +109,12 @@ class AuthController extends Controller
 
     public function disapprove_user_by_email(Request $request)
     {
+        if ($request->email == "admin@gmail.com") {
+            $response = [
+                'message' => "Cannot Change Role",
+            ];
+            return response($response, 201);
+        }
         $user = User::where('email', $request->email)->first();
         $user->update(['role' => 'visitor']);
         return $user;
