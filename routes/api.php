@@ -121,7 +121,7 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
 
     Route::resource('/PlayBook', PlayBookController::class);
-    Route::put('/PlayBook', [PlayBookController::class . 'update']);
+    Route::put('/PlayBook', [PlayBookController::class , 'update']);
     Route::delete('/PlayBook', [PlayBookController::class, 'destroy']);
 
 
