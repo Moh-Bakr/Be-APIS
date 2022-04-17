@@ -59,8 +59,8 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/advisorysource', [AdvisorySourceController::class, 'delete']);
 
     Route::resource('/servicecateloge', ServiceCatelogeController::class);
-    Route::put('/servicecateloge', [ServiceCatelogeController::class . 'update']);
-    Route::delete('/servicecateloge', [ServiceCatelogeController::class . 'delete']);
+    Route::put('/servicecateloge', [ServiceCatelogeController::class , 'update']);
+    Route::delete('/servicecateloge', [ServiceCatelogeController::class , 'delete']);
 
     Route::resource('/HealthCheck', DailyHealthCheckController::class);
     Route::put('/HealthCheck', [DailyHealthCheckController::class, 'update']);
