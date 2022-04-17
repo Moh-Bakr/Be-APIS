@@ -68,6 +68,9 @@ class ShifttestController extends Controller
             $shifts = shifttest::where('month', $request->month)->first();
             $shifts->delete(['shifts' => $request->shifts]);
         }
-        return $shifts;
+        $response = [
+            'message' => "Deleted Successfully",
+        ];
+        return response($response, 201);
     }
 }
