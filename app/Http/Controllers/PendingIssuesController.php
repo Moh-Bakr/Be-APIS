@@ -10,7 +10,7 @@ class PendingIssuesController extends Controller
 {
     public function index()
     {
-        return PendingIssues::get()->all();
+        return PendingIssues::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -41,6 +41,26 @@ class PendingIssuesController extends Controller
         ]);
         $response = [
             'PendingIssues' => $PendingIssues,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $PendingIssues = PendingIssues::find($request->id);
+        $PendingIssues->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $PendingIssues = PendingIssues::find($request->id);
+        $PendingIssues->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

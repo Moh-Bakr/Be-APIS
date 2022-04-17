@@ -10,7 +10,7 @@ class AdvisorySourceController extends Controller
 {
     public function index()
     {
-        return AdvisorySource::get()->all();
+        return AdvisorySource::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -39,6 +39,26 @@ class AdvisorySourceController extends Controller
         ]);
         $response = [
             'AdvisorySource' => $AdvisorySource,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $AdvisorySource = AdvisorySource::find($request->id);
+        $AdvisorySource->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $AdvisorySource = AdvisorySource::find($request->id);
+        $AdvisorySource->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

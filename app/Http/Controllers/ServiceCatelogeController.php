@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceCateloge;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ServiceCatelogeController extends Controller
 {
     public function index()
     {
-        return ServiceCateloge::get()->all();
+        return ServiceCateloge::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -26,10 +27,10 @@ class ServiceCatelogeController extends Controller
                 'consumers' => 'required|string',
                 'processes' => 'required|string',
             ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
+        } catch (ValidationException $th) {
             return $th->validator->errors();
         }
-        $AdvisorySource = ServiceCateloge::create([
+        $ServiceCateloge = ServiceCateloge::create([
             'name' => $fields['name'],
             'owner' => $fields['owner'],
             'description' => $fields['description'],
@@ -41,7 +42,27 @@ class ServiceCatelogeController extends Controller
             'processes' => $fields['processes'],
         ]);
         $response = [
-            'AdvisorySource' => $AdvisorySource,
+            'ServiceCateloge' => $ServiceCateloge,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $ServiceCateloge = ServiceCateloge::find($request->id);
+        $ServiceCateloge->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $ServiceCateloge = ServiceCateloge::find($request->id);
+        $ServiceCateloge->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

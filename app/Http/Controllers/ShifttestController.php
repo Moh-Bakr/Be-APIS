@@ -20,7 +20,7 @@ class ShifttestController extends Controller
 //            ->get()->all();
         //        return ShiftsResource::collection($users);
 
-        $products = shifttest::orderBy('month','ASC')->get();;
+        $products = shifttest::orderBy('month', 'ASC')->get();;
         return $products->groupBy('month');
     }
 
@@ -55,6 +55,18 @@ class ShifttestController extends Controller
         } else {
             $shifts = shifttest::where('month', $request->month)->first();
             $shifts->update(['shifts' => $request->shifts]);
+        }
+        return $shifts;
+    }
+
+    public function delete(Request $request)
+    {
+        $shiftsname = shifttest::where('name', $request->name)->first();
+        if ($shiftsname == NULL) {
+            return "THere is no user with this name " . $request->id;
+        } else {
+            $shifts = shifttest::where('month', $request->month)->first();
+            $shifts->delete(['shifts' => $request->shifts]);
         }
         return $shifts;
     }

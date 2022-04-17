@@ -10,7 +10,7 @@ class UseCaseController extends Controller
 {
     public function index()
     {
-        return UseCase::get()->all();
+        return UseCase::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -53,6 +53,26 @@ class UseCaseController extends Controller
         ]);
         $response = [
             'use_cases' => $use_cases,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $UseCase = UseCase::find($request->id);
+        $UseCase->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $UseCase = UseCase::find($request->id);
+        $UseCase->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

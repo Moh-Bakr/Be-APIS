@@ -10,8 +10,9 @@ class CommunicationController extends Controller
 {
     public function index()
     {
-        return Communication::get()->all();
+        return Communication::orderBy('id', 'ASC')->get();
     }
+
     public function store(Request $request)
     {
         try {
@@ -40,6 +41,26 @@ class CommunicationController extends Controller
         ]);
         $response = [
             'Communication' => $Communication,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $Communication = Communication::find($request->id);
+        $Communication->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $Communication = Communication::find($request->id);
+        $Communication->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

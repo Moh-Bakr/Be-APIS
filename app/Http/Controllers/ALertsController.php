@@ -10,7 +10,7 @@ class ALertsController extends Controller
 {
     public function index()
     {
-        return ALerts::get()->all();
+        return ALerts::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -43,6 +43,26 @@ class ALertsController extends Controller
         ]);
         $response = [
             'ALerts' => $ALerts,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $ALerts = ALerts::find($request->id);
+        $ALerts->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $ALerts = ALerts::find($request->id);
+        $ALerts->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

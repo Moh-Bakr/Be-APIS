@@ -10,7 +10,7 @@ class IncidentGController extends Controller
 {
     public function index()
     {
-        return IncidentG::get()->all();
+        return IncidentG::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -80,5 +80,25 @@ class IncidentGController extends Controller
         ];
         return response($response, 201);
 
+    }
+
+    public function update(Request $request)
+    {
+        $IncidentG = IncidentG::find($request->id);
+        $IncidentG->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $IncidentG = IncidentG::find($request->id);
+        $IncidentG->delete();
+        $response = [
+            'message' => "Deleted Successfully",
+        ];
+        return response($response, 201);
     }
 }

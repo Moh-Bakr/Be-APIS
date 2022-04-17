@@ -10,7 +10,7 @@ class DailyHealthCheckController extends Controller
 {
     public function index()
     {
-        return DailyHealthCheck::get()->all();
+        return DailyHealthCheck::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -51,6 +51,26 @@ class DailyHealthCheckController extends Controller
         ]);
         $response = [
             'DailyHealthCheck' => "Created Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $DailyHealthCheck = DailyHealthCheck::find($request->id);
+        $DailyHealthCheck->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $DailyHealthCheck = DailyHealthCheck::find($request->id);
+        $DailyHealthCheck->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }

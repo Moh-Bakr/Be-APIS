@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
                 'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed'
             ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
+        } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $user = User::create([
@@ -42,7 +43,7 @@ class AuthController extends Controller
                 'email' => 'required|string',
                 'password' => 'required|string'
             ]);
-        } catch (\Illuminate\Validation\ValidationException $th) {
+        } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $user = User::where('email', $fields['email'])->first();
@@ -71,6 +72,26 @@ class AuthController extends Controller
     public function users()
     {
         return User::orderBy('id', 'ASC')->get();
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $user->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $user->delete();
+        $response = [
+            'message' => "Deleted Successfully",
+        ];
+        return response($response, 201);
     }
 
     public function approve_user_by_email(Request $request)

@@ -10,7 +10,7 @@ class IncidentsController extends Controller
 {
     public function index()
     {
-        return Incidents::get()->all();
+        return Incidents::orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)
@@ -43,6 +43,26 @@ class IncidentsController extends Controller
         ]);
         $response = [
             'Incidents' => $Incidents,
+        ];
+        return response($response, 201);
+    }
+
+    public function update(Request $request)
+    {
+        $Incidents = Incidents::find($request->id);
+        $Incidents->update($request->all());
+        $response = [
+            'message' => "Updated Successfully",
+        ];
+        return response($response, 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $Incidents = Incidents::find($request->id);
+        $Incidents->delete();
+        $response = [
+            'message' => "Deleted Successfully",
         ];
         return response($response, 201);
     }
