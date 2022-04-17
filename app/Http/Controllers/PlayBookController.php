@@ -54,6 +54,7 @@ class PlayBookController extends Controller
 //            ];
         }
     }
+
     public function update(Request $request)
     {
         try {
@@ -62,6 +63,7 @@ class PlayBookController extends Controller
                 'description' => 'required|string',
                 'category' => 'required|string',
                 'data' => 'required|string',
+                'file' => 'required|image'
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
