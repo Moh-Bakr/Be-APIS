@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('subtitle');
             $table->string('vision');
             $table->string('mission');
-            $table->string('goal');
+            $table->text('goal');
             $table->string('name');
             $table->string('file_path');
             $table->string('url');

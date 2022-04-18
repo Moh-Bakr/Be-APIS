@@ -31,6 +31,8 @@ class UseCaseController extends Controller
                 'playbook' => 'required|string',
                 'production' => 'required|string',
                 'testing' => 'required|string',
+                'tactics' => '',
+                'techniques' => '',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -50,6 +52,8 @@ class UseCaseController extends Controller
             'playbook' => $fields['playbook'],
             'production' => $fields['production'],
             'testing' => $fields['testing'],
+            'tactics' => $fields['tactics'] ?? null,
+            'techniques' => $fields['techniques'] ?? null,
         ]);
         $response = [
             'use_cases' => $use_cases,

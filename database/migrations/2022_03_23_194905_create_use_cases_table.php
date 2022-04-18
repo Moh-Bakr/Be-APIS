@@ -28,6 +28,8 @@ return new class extends Migration {
             $table->string('playbook');
             $table->string('production');
             $table->string('testing');
+            $table->string('tactics')->nullable();
+            $table->string('techniques')->nullable();
             $table->timestamps();
         });
     }
