@@ -22,6 +22,10 @@ return new class extends Migration {
             $table->string('SecondaryEmail')->nullable();
             $table->string('SecondaryName')->nullable();
             $table->string('SecondaryPhone')->nullable();
+            $table->string('PrimaryMobile')->nullable();
+            $table->string('SecondaryMobile')->nullable();
+            $table->string('GroupEmail')->nullable();
+            $table->string('GroupManager')->nullable();
             $table->timestamps();
 
         });

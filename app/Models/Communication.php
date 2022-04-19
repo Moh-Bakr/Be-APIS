@@ -18,6 +18,10 @@ class Communication extends Model
         'SecondaryEmail',
         'SecondaryName',
         'SecondaryPhone',
+        'PrimaryMobile',
+        'SecondaryMobile',
+        'GroupEmail',
+        'GroupManager',
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }

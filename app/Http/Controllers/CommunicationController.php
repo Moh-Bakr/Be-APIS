@@ -25,6 +25,10 @@ class CommunicationController extends Controller
                 'SecondaryEmail' => '',
                 'SecondaryName' => '',
                 'SecondaryPhone' => '',
+                'PrimaryMobile' => '',
+                'SecondaryMobile' => '',
+                'GroupEmail' => '',
+                'GroupManager' => '',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -38,6 +42,10 @@ class CommunicationController extends Controller
             'SecondaryEmail' => $fields['SecondaryEmail'] ?? NULL,
             'SecondaryName' => $fields['SecondaryName'] ?? NULL,
             'SecondaryPhone' => $fields['SecondaryPhone'] ?? NULL,
+            'PrimaryMobile' => $fields['PrimaryMobile'] ?? NULL,
+            'SecondaryMobile' => $fields['SecondaryMobile'] ?? NULL,
+            'GroupEmail' => $fields['GroupEmail'] ?? NULL,
+            'GroupManager' => $fields['GroupManager'] ?? NULL,
         ]);
         $response = [
             'Communication' => $Communication,

@@ -19,6 +19,7 @@ use App\Http\Controllers\ReportsPDFController;
 use App\Http\Controllers\ServiceCatelogeController;
 use App\Http\Controllers\ShiftsController;
 use App\Http\Controllers\ShifttestController;
+use App\Http\Controllers\SkillMatrixController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SystemHealthIssueController;
 use App\Http\Controllers\UseCaseController;
@@ -59,8 +60,8 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/advisorysource', [AdvisorySourceController::class, 'delete']);
 
     Route::resource('/servicecateloge', ServiceCatelogeController::class);
-    Route::put('/servicecateloge', [ServiceCatelogeController::class , 'update']);
-    Route::delete('/servicecateloge', [ServiceCatelogeController::class , 'delete']);
+    Route::put('/servicecateloge', [ServiceCatelogeController::class, 'update']);
+    Route::delete('/servicecateloge', [ServiceCatelogeController::class, 'delete']);
 
     Route::resource('/HealthCheck', DailyHealthCheckController::class);
     Route::put('/HealthCheck', [DailyHealthCheckController::class, 'update']);
@@ -121,13 +122,18 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/ProceduresPDF', [ProceduresPDFController::class, 'destroy']);
 
     Route::resource('/PlayBook', PlayBookController::class);
-    Route::put('/PlayBook', [PlayBookController::class , 'update']);
+    Route::put('/PlayBook', [PlayBookController::class, 'update']);
     Route::delete('/PlayBook', [PlayBookController::class, 'destroy']);
 
 
     Route::resource('/Home', HomeController::class);
     Route::put('/Home', [HomeController::class, 'update']);
     Route::delete('/Home', [HomeController::class, 'destroy']);
+
+
+    Route::resource('/SkillMatrix', SkillMatrixController::class);
+    Route::put('/SkillMatrix', [HomeController::class, 'update']);
+    Route::delete('/SkillMatrix', [HomeController::class, 'destroy']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
