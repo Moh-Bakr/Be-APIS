@@ -133,7 +133,7 @@ Route::middleware(['cors'])->group(function () {
 
     Route::resource('/SkillMatrix', SkillMatrixController::class);
     Route::put('/SkillMatrix', [SkillMatrixController::class, 'update']);
-    Route::delete('/SkillMatrix', [SkillMatrixController::class, 'destroy']);
+    Route::delete('/SkillMatrix', [SkillMatrixController::class, 'delete']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
