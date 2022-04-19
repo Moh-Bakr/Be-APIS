@@ -10,7 +10,7 @@ class SkillMatrixController extends Controller
 {
     public function index()
     {
-        $SkillMatrix = SkillMatrix::orderBy('Level', 'ASC')->get();;
+        $SkillMatrix = SkillMatrix::orderBy('Level')->get();;
         return $SkillMatrix->groupBy('Category');
     }
 
