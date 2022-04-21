@@ -53,11 +53,11 @@ class HomeController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'required|string',
-                'subtitle' => 'required|string',
-                'vision' => 'required|string',
-                'mission' => 'required|string',
-                'goal' => 'required|string',
+                'title' => 'string',
+                'subtitle' => 'string',
+                'vision' => 'string',
+                'mission' => 'string',
+                'goal' => 'image',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -65,11 +65,11 @@ class HomeController extends Controller
         $fileModel = Home::find($request->id);
         $api = 'https://beapis.herokuapp.com';
 
-        $fileModel->title = $request->title;
-        $fileModel->subtitle = $request->subtitle;
-        $fileModel->vision = $request->vision;
-        $fileModel->mission = $request->mission;
-        $fileModel->goal = $request->goal;
+//        $fileModel->title = $request->title;
+//        $fileModel->subtitle = $request->subtitle;
+//        $fileModel->vision = $request->vision;
+//        $fileModel->mission = $request->mission;
+//        $fileModel->goal = $request->goal;
 
 
         if ($request->file()) {
@@ -81,12 +81,12 @@ class HomeController extends Controller
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = $api . $fileModel->file_path;
-            $fileModel->update();
-            $response = [
-                'message' => 'Updated Successfully',
-            ];
-            return response($response, 201);
         }
+        $fileModel->update($request->all());
+        $response = [
+            'message' => 'Updated Successfully',
+        ];
+        return response($response, 201);
     }
 
     public function destroy(Request $request)
