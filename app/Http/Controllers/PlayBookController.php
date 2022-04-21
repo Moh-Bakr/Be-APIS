@@ -59,11 +59,11 @@ class PlayBookController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'required|string',
-                'description' => 'required|string',
-                'category' => 'required|string',
-                'data' => 'required|string',
-                'file' => 'required|image'
+                'title' => 'string',
+                'description' => 'string',
+                'category' => 'string',
+                'data' => 'string',
+                'file' => 'image'
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -71,10 +71,10 @@ class PlayBookController extends Controller
         $fileModel = PlayBook::find($request->id);
         $api = 'https://beapis.herokuapp.com';
 
-        $fileModel->title = $request->title;
-        $fileModel->description = $request->description;
-        $fileModel->data = $request->data;
-        $fileModel->category = $request->category;
+//        $fileModel->title = $request->title;
+//        $fileModel->description = $request->description;
+//        $fileModel->data = $request->data;
+//        $fileModel->category = $request->category;
 
 
         if ($request->file()) {
@@ -86,12 +86,13 @@ class PlayBookController extends Controller
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = $api . $fileModel->file_path;
-            $fileModel->update();
-            $response = [
-                'message' => 'Updated Successfully',
-            ];
-            return response($response, 201);
         }
+
+        $fileModel->update($request->all());
+        $response = [
+            'message' => 'Updated Successfully',
+        ];
+        return response($response, 201);
     }
 
     public function destroy(Request $request)

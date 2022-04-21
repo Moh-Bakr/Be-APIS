@@ -26,6 +26,7 @@ class PoliciesPDFController extends Controller
         }
         $fileModel = new PoliciesPDF;
         $api = 'https://beapis.herokuapp.com';
+//        $api = config('config.local');
         if ($req->file()) {
             $fileModel->title = $req->title;
             $fileName = time() . '_' . $req->file->getClientOriginalName();
@@ -49,7 +50,8 @@ class PoliciesPDFController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'required|string',
+                'title' => 'string',
+                'file' => 'mimes:pdf',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
@@ -57,7 +59,7 @@ class PoliciesPDFController extends Controller
         $fileModel = PoliciesPDF::find($request->id);
         $api = 'https://beapis.herokuapp.com';
 
-        $fileModel->title = $request->title;
+//        $fileModel->title = $request->title;
 
 
         if ($request->file()) {
@@ -69,12 +71,12 @@ class PoliciesPDFController extends Controller
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = $api . $fileModel->file_path;
-            $fileModel->update();
-            $response = [
-                'message' => 'Updated Successfully',
-            ];
-            return response($response, 201);
         }
+        $fileModel->update($request->all());
+        $response = [
+            'message' => 'Updated Successfully',
+        ];
+        return response($response, 201);
     }
 
     public function destroy(Request $request)
