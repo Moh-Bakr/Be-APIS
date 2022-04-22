@@ -45,6 +45,8 @@ Route::middleware(['cors'])->group(function () {
     Route::delete('/users', [AuthController::class, 'delete']);
     Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
     Route::put('/disapprove/user', [AuthController::class, 'disapprove_user_by_email']);
+    Route::put('/read/user', [AuthController::class, 'read_request']);
+    Route::put('/write/user', [AuthController::class, 'write_request']);
 
     Route::get('/orgs', [OrgStructureController::class, 'index']);
     Route::post('/orgs', [OrgStructureController::class, 'store']);

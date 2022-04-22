@@ -120,5 +120,31 @@ class AuthController extends Controller
         return $user;
     }
 
+    public function read_request(Request $request)
+    {
+        if ($request->email == "admin@gmail.com") {
+            $response = [
+                'message' => "Cannot Change permission",
+            ];
+            return response($response, 201);
+        }
+        $user = User::where('email', $request->email)->first();
+        $user->update(['permission' => 'read']);
+        return $user;
+    }
+
+    public function write_request(Request $request)
+    {
+        if ($request->email == "admin@gmail.com") {
+            $response = [
+                'message' => "Cannot Change permission",
+            ];
+            return response($response, 201);
+        }
+        $user = User::where('email', $request->email)->first();
+        $user->update(['permission' => 'write']);
+        return $user;
+    }
+
 
 }

@@ -23,9 +23,11 @@ class User extends Authenticatable
         'password',
         'phone',
         'role',
+        'permission',
     ];
     protected $attributes = [
-        'role' => "visitor"
+        'role' => "visitor",
+        'permission' => "read"
     ];
 
     /**
