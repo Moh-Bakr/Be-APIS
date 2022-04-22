@@ -32,7 +32,7 @@ class ReportsPDFController extends Controller
             $filePath = $req->file('file')->storeAs('ReportsPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->url = config('config.heroku') . $fileModel->file_path;
             $fileModel->save();
 
             return [
@@ -68,7 +68,7 @@ class ReportsPDFController extends Controller
             $filePath = $request->file('file')->storeAs('ReportsPDF', $fileName, 'public');
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->url = config('config.heroku') . $fileModel->file_path;
         }
         $fileModel->update($request->all());
         $response = [

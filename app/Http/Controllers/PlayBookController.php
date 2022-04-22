@@ -38,7 +38,7 @@ class PlayBookController extends Controller
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->description = $req->description;
             $fileModel->data = $req->data;
-            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->url = config('config.heroku') . $fileModel->file_path;
             $fileModel->save();
             $response = [
                 'message' => 'Created Successfully',
@@ -85,7 +85,7 @@ class PlayBookController extends Controller
             $filePath = $request->file('file')->storeAs('PlayBook', $fileName, 'public');
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->url = $api . $fileModel->file_path;
+            $fileModel->url = config('config.heroku') . $fileModel->file_path;
         }
 
         $fileModel->update($request->all());
