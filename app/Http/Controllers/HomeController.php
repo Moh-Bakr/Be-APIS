@@ -57,7 +57,8 @@ class HomeController extends Controller
                 'subtitle' => 'string',
                 'vision' => 'string',
                 'mission' => 'string',
-                'goal' => 'image',
+                'goal' => 'string',
+                'file' => 'image',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
