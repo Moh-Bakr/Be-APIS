@@ -36,6 +36,7 @@ class IncidentG extends Model
         'Title',
         'Signature',
         'Date',
+        'RepeatedIncidentName',
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }
