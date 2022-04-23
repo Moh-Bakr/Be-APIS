@@ -21,9 +21,15 @@ class HomeSeeder extends Seeder
             'vision' => 'vision',
             'mission' => 'mission',
             'goal' => 'goal',
+            'phone' => 'phone',
+            'email' => 'email',
             'name' => 'name',
             'file_path' => 'file_path',
             'url' => 'url',
+            'background_name' => 'background_name',
+            'background_path' => 'background_path',
+            'background_url' => 'background_url',
+
         ]);
     }
 }
