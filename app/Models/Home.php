@@ -11,12 +11,18 @@ class Home extends Model
 {
     protected $fillable = [
         'title',
+        'phone',
+        'email',
         'subtitle',
         'vision',
         'mission',
         'goal',
         'name',
         'file_path',
+        'url',
+        'background_name',
+        'background_path',
+        'background_url',
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }

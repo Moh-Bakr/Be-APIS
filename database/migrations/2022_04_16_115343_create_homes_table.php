@@ -16,12 +16,17 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('subtitle');
+            $table->string('phone');
+            $table->string('email');
             $table->string('vision');
             $table->string('mission');
             $table->text('goal');
             $table->string('name');
             $table->string('file_path');
             $table->string('url');
+            $table->string('background_name');
+            $table->string('background_path');
+            $table->string('background_url');
             $table->timestamps();
         });
     }

@@ -23,24 +23,37 @@ class HomeController extends Controller
                 'vision' => 'required|string',
                 'mission' => 'required|string',
                 'goal' => 'required|string',
-                'file' => 'required|image'
+                'file' => 'required|image',
+                'background' => 'required|image',
+                'phone' => 'required|string',
+                'email' => 'required|string',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $fileModel = new Home;
-        $api = 'https://beapis.herokuapp.com';
+//        $api = 'https://beapis.herokuapp.com';
         if ($req->file()) {
             $fileModel->title = $req->title;
             $fileModel->subtitle = $req->subtitle;
             $fileModel->vision = $req->vision;
             $fileModel->mission = $req->mission;
             $fileModel->goal = $req->goal;
+            $fileModel->phone = $req->phone;
+            $fileModel->email = $req->email;
+
             $fileName = time() . '_' . $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('Home', $fileName, 'public');
             $fileModel->name = time() . '_' . $req->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = config('config.heroku') . $fileModel->file_path;
+
+            $backgroundName = time() . '_' . $req->background->getClientOriginalName();
+            $backgroundPath = $req->file('background')->storeAs('Home', $backgroundName, 'public');
+            $fileModel->background_name = time() . '_' . $req->background->getClientOriginalName();
+            $fileModel->background_path = '/storage/' . $backgroundPath;
+            $fileModel->background_url = config('config.heroku') . $fileModel->background_path;
+
             $fileModel->save();
             $response = [
                 'message' => 'Created Successfully',
@@ -59,12 +72,15 @@ class HomeController extends Controller
                 'mission' => 'string',
                 'goal' => 'string',
                 'file' => 'image',
+                'background' => 'image',
+                'phone' => 'string',
+                'email' => 'string',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $fileModel = Home::find($request->id);
-        $api = 'https://beapis.herokuapp.com';
+//        $api = 'https://beapis.herokuapp.com';
 
 //        $fileModel->title = $request->title;
 //        $fileModel->subtitle = $request->subtitle;
@@ -73,7 +89,7 @@ class HomeController extends Controller
 //        $fileModel->goal = $request->goal;
 
 
-        if ($request->file()) {
+        if ($request->hasFile('file')) {
             if (Home::exists(public_path($fileModel->file_path))) {
                 File::delete(public_path($fileModel->file_path));
             }
@@ -82,6 +98,17 @@ class HomeController extends Controller
             $fileModel->name = time() . '_' . $request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->url = config('config.heroku') . $fileModel->file_path;
+        }
+
+        if ($request->hasFile('background')) {
+            if (Home::exists(public_path($fileModel->background_path))) {
+                File::delete(public_path($fileModel->background_path));
+            }
+            $backgroundName = time() . '_' . $request->background->getClientOriginalName();
+            $backgroundPath = $request->file('background')->storeAs('Home', $backgroundName, 'public');
+            $fileModel->background_name = time() . '_' . $request->background->getClientOriginalName();
+            $fileModel->background_path = '/storage/' . $backgroundPath;
+            $fileModel->background_url = config('config.heroku') . $fileModel->background_path;
         }
         $fileModel->update($request->all());
         $response = [
@@ -94,15 +121,25 @@ class HomeController extends Controller
     {
         $pdf = Home::find($request->id);
         if ($pdf != NULL) {
-            if (Home::exists(public_path($pdf->file_path))) {
+            if (Home::exists(public_path($pdf->file_path)) || Home::exists(public_path($pdf->background_path))) {
                 File::delete(public_path($pdf->file_path));
+                File::delete(public_path($pdf->background_path));
                 Home::destroy($request->id);
-                return 'File Has Been Deleted';
+                $response = [
+                    'message' => 'File Has Been Deleted',
+                ];
+                return response($response, 201);
             } else {
-                return 'File Does Not Exists.';
+                $response = [
+                    'message' => 'File Does Not Exists',
+                ];
+                return response($response, 201);
             }
         } else {
-            return 'There is No Record Found';
+            $response = [
+                'message' => 'There is No Record Found',
+            ];
+            return response($response, 201);
         }
     }
 }
