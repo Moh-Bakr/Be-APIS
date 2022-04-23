@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('TimeOfDetection');
             $table->string('IncidentName');
-            $table->string('RepeatedIncidentName');
+            $table->string('RepeatedIncidentNumber');
             $table->string('DetectorName');
             $table->string('ContactInfo');
             $table->string('Location');
