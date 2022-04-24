@@ -32,7 +32,7 @@ class PendingIssuesController extends Controller
         $PendingIssues = PendingIssues::create([
             'issue' => $fields['issue'],
             'description' => $fields['description'],
-            'StartTime' => $fields['description'],
+            'StartTime' => $fields['StartTime'],
             'ActionTaken' => $fields['ActionTaken'],
             'NextAction' => $fields['NextAction'],
             'who' => $fields['who'],

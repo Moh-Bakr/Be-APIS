@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('category');
             $table->string('description');
-            $table->string('data');
+            $table->text('data');
             $table->string('name');
             $table->string('file_path');
             $table->string('url');
