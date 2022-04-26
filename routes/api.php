@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdvisorySourceController;
 use App\Http\Controllers\ALertsController;
+use App\Http\Controllers\AllShiftsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\DailyHealthCheckController;
@@ -43,8 +44,10 @@ Route::middleware(['cors'])->group(function () {
     Route::get('/users', [AuthController::class, 'users']);
     Route::put('/users', [AuthController::class, 'update']);
     Route::delete('/users', [AuthController::class, 'delete']);
+
     Route::put('/approve/user', [AuthController::class, 'approve_user_by_email']);
     Route::put('/disapprove/user', [AuthController::class, 'disapprove_user_by_email']);
+
     Route::put('/read/user', [AuthController::class, 'read_request']);
     Route::put('/write/user', [AuthController::class, 'write_request']);
 
@@ -107,6 +110,10 @@ Route::middleware(['cors'])->group(function () {
     Route::resource('/Shifts', shifttestController::class);
     Route::put('/Shifts', [shifttestController::class, 'update']);
     Route::delete('/Shifts', [shifttestController::class, 'delete']);
+
+    Route::resource('/AllShifts', AllShiftsController::class);
+    Route::put('/AllShifts', [AllShiftsController::class, 'update']);
+    Route::delete('/AllShifts', [AllShiftsController::class, 'delete']);
 
 //    Route::resource('/PDF', PDFController::class);
 //    Route::delete('/PDF', [PDFController::class, 'destroy']);
