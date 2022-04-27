@@ -10,13 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 class Staff extends Model
 {
     protected $fillable = [
-        'ParentName',
         'Name',
         'Title',
         'Email',
         'Mobile',
         'Phone',
-        'child',
     ];
     use HasApiTokens, HasFactory, Notifiable;
 }

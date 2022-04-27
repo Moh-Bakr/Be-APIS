@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('ParentName');
             $table->string('Name');
             $table->string('Title');
             $table->string('Email')->unique();
             $table->string('Mobile');
             $table->string('Phone');
-            $table->boolean('child');
             $table->timestamps();
 
         });

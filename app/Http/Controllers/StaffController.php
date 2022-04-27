@@ -10,8 +10,8 @@ class StaffController extends Controller
 {
     public function index()
     {
-        $products = Staff::orderBy('ParentName','ASC')->get();;
-        return $products->groupBy('ParentName');
+        $products = Staff::orderBy('Title', 'ASC')->get();;
+        return $products->groupBy('Title');
 //        return Staff::get()->all();
     }
 
@@ -19,25 +19,21 @@ class StaffController extends Controller
     {
         try {
             $fields = $request->validate([
-                'ParentName' => 'required|string',
                 'Name' => 'required|string',
                 'Title' => 'required|string',
                 'Email' => 'required|string',
                 'Mobile' => 'required|string',
                 'Phone' => 'required|string',
-                'child' => 'required|boolean',
             ]);
         } catch (ValidationException $th) {
             return $th->validator->errors();
         }
         $Staff = Staff::create([
-            'ParentName' => $fields['ParentName'],
             'Name' => $fields['Name'],
             'Title' => $fields['Title'],
             'Email' => $fields['Email'],
             'Mobile' => $fields['Mobile'],
             'Phone' => $fields['Phone'],
-            'child' => $fields['child'],
         ]);
         $response = [
             'Staff' => $Staff,
