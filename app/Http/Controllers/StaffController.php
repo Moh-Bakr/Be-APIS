@@ -10,7 +10,7 @@ class StaffController extends Controller
 {
     public function index()
     {
-        $products = Staff::orderBy('Title', 'ASC')->get();;
+        $products = Staff::orderBy('id', 'ASC')->get();;
         return $products->groupBy('Title');
 //        return Staff::get()->all();
     }
