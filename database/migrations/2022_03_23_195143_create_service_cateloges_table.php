@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('owner');
-            $table->string('description');
+            $table->text('description');
             $table->string('status');
             $table->string('hours');
-            $table->string('inputs');
-            $table->string('outputs');
-            $table->string('consumers');
-            $table->string('processes');
+            $table->text('inputs');
+            $table->text('outputs');
+            $table->text('consumers');
+            $table->text('processes');
             $table->timestamps();
         });
     }

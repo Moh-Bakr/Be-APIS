@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('name');
             $table->string('number');
-            $table->string('description');
+            $table->text('description');
             $table->string('ActionTaken');
             $table->string('NextAction');
             $table->string('who');

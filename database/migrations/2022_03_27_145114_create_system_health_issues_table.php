@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('ip');
             $table->string('Hostname');
             $table->string('StartTime');
-            $table->string('IssueDescription');
-            $table->string('ActionTaken');
-            $table->string('NextAction');
+            $table->text('IssueDescription');
+            $table->text('ActionTaken');
+            $table->text('NextAction');
             $table->string('who');
             $table->string('status');
             $table->string('CloseTime');

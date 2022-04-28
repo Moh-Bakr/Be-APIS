@@ -14,22 +14,22 @@ return new class extends Migration {
     {
         Schema::create('use_cases', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier');
-            $table->string('purpose');
-            $table->string('risk');
+            $table->text('identifier');
+            $table->text('purpose');
+            $table->text('risk');
             $table->string('type');
             $table->string('stakeholders');
-            $table->string('requirements');
-            $table->string('logic');
-            $table->string('output');
+            $table->text('requirements');
+            $table->text('logic');
+            $table->text('output');
             $table->string('volume');
             $table->string('falsepositive');
             $table->string('priority');
             $table->string('playbook');
-            $table->string('production');
+            $table->text('production');
             $table->string('testing');
-            $table->string('tactics')->nullable();
-            $table->string('techniques')->nullable();
+            $table->text('tactics')->nullable();
+            $table->text('techniques')->nullable();
             $table->timestamps();
         });
     }

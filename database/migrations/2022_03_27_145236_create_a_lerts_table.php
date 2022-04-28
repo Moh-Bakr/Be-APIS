@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('number');
             $table->string('name');
             $table->string('StartTime');
-            $table->string('description');
-            $table->string('ActionTaken');
-            $table->string('NextAction');
+            $table->text('description');
+            $table->text('ActionTaken');
+            $table->text('NextAction');
             $table->string('who');
             $table->string('status');
             $table->string('CloseTime');

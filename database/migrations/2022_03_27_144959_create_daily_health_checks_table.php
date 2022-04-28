@@ -14,16 +14,16 @@ return new class extends Migration {
     {
         Schema::create('daily_health_checks', function (Blueprint $table) {
             $table->id();
-            $table->string('Description');
+            $table->text('Description');
             $table->string('Status');
-            $table->string('IssuesFound')->nullable();
+            $table->text('IssuesFound')->nullable();
             $table->string('Component')->nullable();
             $table->string('Ip')->nullable();
             $table->string('Hostname')->nullable();
             $table->string('StartTime')->nullable();
-            $table->string('IssueDescription')->nullable();
-            $table->string('ActionTaken')->nullable();
-            $table->string('NextAction')->nullable();
+            $table->text('IssueDescription')->nullable();
+            $table->text('ActionTaken')->nullable();
+            $table->text('NextAction')->nullable();
             $table->string('Who')->nullable();
             $table->string('IssueStatus')->nullable();
             $table->string('CloseTime')->nullable();

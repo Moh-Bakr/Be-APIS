@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('org_structures', function (Blueprint $table) {
             $table->id();
-            $table->string('org');
+            $table->text('org');
             $table->timestamps();
         });
     }

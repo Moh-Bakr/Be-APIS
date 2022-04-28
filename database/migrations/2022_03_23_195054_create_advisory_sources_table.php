@@ -14,13 +14,13 @@ return new class extends Migration {
     {
         Schema::create('advisory_sources', function (Blueprint $table) {
             $table->id();
-            $table->string('source');
+            $table->text('source');
             $table->string('date');
             $table->string('referenceid');
-            $table->string('description');
+            $table->text('description');
             $table->string('applicable');
-            $table->string('token')->nullable();
-            $table->string('notes');
+            $table->text('token')->nullable();
+            $table->text('notes');
             $table->timestamps();
         });
     }
