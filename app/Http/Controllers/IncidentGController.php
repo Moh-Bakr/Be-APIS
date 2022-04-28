@@ -19,7 +19,7 @@ class IncidentGController extends Controller
             $fields = $request->validate([
                 'TimeOfDetection' => 'required|string',
                 'IncidentName' => 'required|string',
-                'RepeatedIncidentNumber' => 'string',
+                'RepeatedIncidentNumber' => '',
                 'DetectorName' => 'required|string',
                 'ContactInfo' => 'required|string',
                 'Location' => 'required|string',
