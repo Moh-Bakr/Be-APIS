@@ -24,7 +24,7 @@ class HomeSeeder extends Seeder
             'phone' => 'phone',
             'email' => 'email',
             'name' => 'name',
-            'file_path' => 'file_path',
+            'file_path' => 'https://cdn.mos.cms.futurecdn.net/3upZx2gxxLpW7MBbnKYQLH-1200-80.jpg',
             'url' => 'url',
             'background_name' => 'background_name',
             'background_path' => 'background_path',
