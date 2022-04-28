@@ -20,7 +20,7 @@ class HomeSeeder extends Seeder
             'subtitle' => 'subtitle',
             'vision' => 'vision',
             'mission' => 'mission',
-            'goal' => '[\"first goal\",\"second goal\"]',
+            'goal' => '["first goal","second goal"]',
             'phone' => 'phone',
             'email' => 'email',
             'name' => 'name',
