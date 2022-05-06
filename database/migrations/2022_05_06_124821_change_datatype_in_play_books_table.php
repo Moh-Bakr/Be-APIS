@@ -13,9 +13,9 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('play_books', function (Blueprint $table) {
-            $table->longText('data')->change();
-            $table->longText('description')->change();
-            $table->longText('category')->change();
+//            $table->longText('data')->change();
+//            $table->longText('description')->change();
+//            $table->longText('category')->change();
         });
     }
 
@@ -27,9 +27,9 @@ return new class extends Migration {
     public function down()
     {
         Schema::table('play_books', function (Blueprint $table) {
-            $table->text('data')->change();
-            $table->text('description')->change();
-            $table->text('category')->change();
+//            $table->text('data')->change();
+//            $table->text('description')->change();
+//            $table->text('category')->change();
         });
     }
 };
