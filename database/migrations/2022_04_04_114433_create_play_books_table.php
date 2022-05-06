@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('play_books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('category');
-            $table->text('description');
-            $table->text('data');
+            $table->longText('category');
+            $table->longText('description');
+            $table->longText('data');
             $table->string('name');
             $table->string('file_path');
             $table->string('url');
