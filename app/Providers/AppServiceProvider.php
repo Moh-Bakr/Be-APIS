@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $heroku= "http://127.0.0.1:8040";
-        $local= "http://127.0.0.1:8040";
+        $heroku = "http://192.168.56.101:8040";
+        $local = "http://127.0.0.1:8040";
         config(['config.heroku' => $heroku]);
         config(['config.local' => $local]);
         if ($this->app->environment('production')) {
