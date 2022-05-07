@@ -23,10 +23,10 @@ return new class extends Migration {
             $table->text('goal');
             $table->string('name');
             $table->string('file_path');
-            $table->string('url');
+            $table->text('url');
             $table->string('background_name');
             $table->string('background_path');
-            $table->string('background_url');
+            $table->text('background_url');
             $table->timestamps();
         });
     }

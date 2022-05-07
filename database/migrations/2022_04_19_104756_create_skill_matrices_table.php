@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('skill_matrices', function (Blueprint $table) {
             $table->id();
             $table->string('Category');
-            $table->string('Skill');
+            $table->text('Skill');
             $table->string('Level');
             $table->timestamps();
         });
